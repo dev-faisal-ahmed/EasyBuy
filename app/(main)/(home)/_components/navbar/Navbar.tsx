@@ -5,11 +5,8 @@ import { Logo } from '@/components/shared/Logo';
 import { Container } from '@/components/ui/Container';
 import { usePathname } from 'next/navigation';
 import { NavLink } from './NavLink';
-import { navLinks } from '../data/navLinks';
-import {
-  Search as SearchIcon,
-  ShoppingCart as ShoppingCartIcon,
-} from 'lucide-react';
+import { navLinks } from '../../data/navLinks';
+import { ShoppingCart as ShoppingCartIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export function Navbar() {
@@ -20,7 +17,7 @@ export function Navbar() {
         <Logo />
 
         {/* links */}
-        <div className='flex items-center justify-end gap-5'>
+        <div className='flex items-center justify-end gap-6'>
           {navLinks.map((link) => (
             <NavLink key={link.href} {...link} currentPath={pathName} />
           ))}
