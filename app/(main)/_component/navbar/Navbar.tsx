@@ -5,14 +5,14 @@ import { Logo } from '@/components/shared/Logo';
 import { Container } from '@/components/ui/Container';
 import { usePathname } from 'next/navigation';
 import { NavLink } from './NavLink';
-import { navLinks } from '../../(home)/data/navLinks';
+import { navLinks } from './navLinks.data';
 import { ShoppingCart as ShoppingCartIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export function Navbar() {
   const pathName = usePathname();
   return (
-    <nav className='border-b border-gray-300 py-5'>
+    <nav className='sticky top-0 border-b border-gray-300 bg-white py-5'>
       <Container className='flex items-center justify-between'>
         <Logo />
 
