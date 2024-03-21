@@ -5,7 +5,7 @@ import { Logo } from '@/components/shared/Logo';
 import { Container } from '@/components/ui/Container';
 import { usePathname } from 'next/navigation';
 import { NavLink } from './NavLink';
-import { navLinks } from '../../data/navLinks';
+import { navLinks } from '../../(home)/data/navLinks';
 import { ShoppingCart as ShoppingCartIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
