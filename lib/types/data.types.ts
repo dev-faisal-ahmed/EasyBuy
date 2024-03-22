@@ -15,6 +15,12 @@ export type ProductType = {
 
 export type UserType = {
   name: string;
-  email: string;
+  phone: string;
   password: string;
+};
+
+export type ServerResponseType<DataType> = {
+  ok: boolean;
+  message: string;
+  data: DataType;
 };

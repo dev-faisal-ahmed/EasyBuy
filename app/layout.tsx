@@ -22,7 +22,7 @@ export default function RootLayout({ children }: WrapperType) {
         )}
       >
         {children}
-        <Toaster richColors />
+        <Toaster duration={1000} richColors />
       </body>
     </html>
   );

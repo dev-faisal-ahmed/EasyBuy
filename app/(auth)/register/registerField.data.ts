@@ -6,10 +6,10 @@ export const registerFieldData = [
     name: 'name',
   },
   {
-    label: 'Email',
-    placeholder: 'Input Your Email',
-    type: 'email',
-    name: 'email',
+    label: 'Phone',
+    placeholder: 'Input Your Phone',
+    type: 'number',
+    name: 'phone',
   },
   {
     label: 'Password',

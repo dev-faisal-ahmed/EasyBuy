@@ -7,66 +7,49 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { useForm } from 'react-hook-form';
-import { USER } from '@/lib/data/sampleUser.data';
-import { getDataFromLocal, setDataToLocal } from '@/utils/localStorage.helper';
-import { LocalStorageKeys } from '@/lib/data/localStorageKeys.data';
-import { UserType } from '@/lib/types/data.types';
+import { registerFieldData } from './registerField.data';
+import { RegisterAction } from './register.action';
+import { useRef, useState } from 'react';
+import { ServerResponseType } from '@/lib/types/data.types';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import { registerFieldData } from './lib/registerField.data';
+import { isValidNumber } from '@/utils/validation.helper';
 import Link from 'next/link';
 
-type RegisterFieldsType = {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
-
-type LoginFieldsNameType = 'name' | 'email' | 'password' | 'confirmPassword';
-
 export default function RegisterPage() {
-  const { register, handleSubmit, reset } = useForm<RegisterFieldsType>();
-
+  const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (data: RegisterFieldsType) => {
-    // getting all users from local storage and merging them with default user
-    const users = getDataFromLocal<UserType[]>(LocalStorageKeys.USERS) || [];
-    const usersWithDefaultUser = [USER, ...users];
-
+  const handleRegisterAction = async (formData: FormData) => {
+    const toastId = toast.loading('Creating User...');
     try {
-      // checking if user already exist
-      const [user] = usersWithDefaultUser.filter(
-        (user) => user.email === data.email,
-      );
+      setIsLoading(true);
+      // validating user's number
+      const phone = formData.get('phone');
+      const password = formData.get('password');
+      const confirmPassword = formData.get('confirmPassword');
 
-      if (user) throw new Error('User already Exist');
+      if (!isValidNumber(phone as string)) throw new Error('Invalid Number');
+      if (password !== confirmPassword)
+        throw new Error('Confirm Password and Password does not match');
 
-      // checking if password matches with confirmPassword
-      if (data.password !== data.confirmPassword)
-        throw new Error('Password and Confirm Password does not match');
+      const response: ServerResponseType<null> = await RegisterAction(formData);
 
-      // adding new user to the collections
-      users.push({
-        name: data.name.trim(),
-        email: data.email.trim(),
-        password: data.password,
-      });
+      if (!response.ok) throw new Error(response.message);
+      toast.success(response.message, { id: toastId });
+      router.push('/');
 
-      // setting info to the local
-      setDataToLocal(LocalStorageKeys.USERS, users);
-      toast.success('Account Created!');
-
-      reset();
-      router.push('/login');
+      formRef.current?.reset();
     } catch (err) {
-      if (err instanceof Error) toast.error(err.message);
-      else toast.error('Something Went Wrong');
+      if (err instanceof Error) toast.error(err.message, { id: toastId });
+      else toast.error(JSON.stringify(err));
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -78,7 +61,8 @@ export default function RegisterPage() {
         </CardHeader>
         <CardContent>
           <form
-            onSubmit={handleSubmit(handleLogin)}
+            ref={formRef}
+            action={handleRegisterAction}
             className='flex flex-col gap-3'
           >
             {registerFieldData.map(({ name, label, placeholder, type }) => (
@@ -88,18 +72,21 @@ export default function RegisterPage() {
                   id={name}
                   placeholder={placeholder}
                   type={type}
-                  {...register(name as LoginFieldsNameType)}
+                  name={name}
                   required
                 />
               </div>
             ))}
-            <CardDescription className='text-center'>
+
+            <CardDescription className='mt-2 text-center'>
               Already have an account?{' '}
               <Link className='text-blue-500 underline' href={'/login'}>
                 Login
               </Link>
             </CardDescription>
-            <Button className='mt-5'>Register</Button>
+            <Button disabled={isLoading} className='mt-5'>
+              Register
+            </Button>
           </form>
         </CardContent>
       </Card>
