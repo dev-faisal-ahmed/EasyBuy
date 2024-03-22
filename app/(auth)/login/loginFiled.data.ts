@@ -1,14 +1,16 @@
 export const logionFieldData = [
   {
-    label: 'Email',
-    placeholder: 'Input Your Email',
-    type: 'email',
-    name: 'email',
+    label: 'Phone',
+    placeholder: 'Input Your Phone',
+    type: 'number',
+    name: 'phone',
+    defaultValue: '01575008359',
   },
   {
     label: 'Password',
     placeholder: 'Input Your Password',
     type: 'password',
     name: 'password',
+    defaultValue: '1234',
   },
 ];

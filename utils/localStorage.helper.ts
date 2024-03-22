@@ -1,4 +1,6 @@
-import { LocalStorageKeys } from '@/lib/data/localStorageKeys.data';
+export enum LocalStorageKeys {
+  USER = 'USER',
+}
 
 export function getDataFromLocal<DataType>(key: LocalStorageKeys) {
   if (typeof window === 'undefined') return null;

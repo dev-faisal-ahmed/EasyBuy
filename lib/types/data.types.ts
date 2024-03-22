@@ -22,5 +22,5 @@ export type UserType = {
 export type ServerResponseType<DataType> = {
   ok: boolean;
   message: string;
-  data: DataType;
+  data?: DataType;
 };

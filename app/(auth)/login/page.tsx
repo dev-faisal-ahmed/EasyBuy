@@ -11,49 +11,44 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { logionFieldData } from './loginFiled.data';
 import { Button } from '@/components/ui/button';
-import { useForm } from 'react-hook-form';
-import { USER } from '@/lib/data/sampleUser.data';
-import { getDataFromLocal, setDataToLocal } from '@/utils/localStorage.helper';
-import { LocalStorageKeys } from '@/lib/data/localStorageKeys.data';
-import { UserType } from '@/lib/types/data.types';
-import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { useRef, useState } from 'react';
+import { LoginAction } from './login.action';
+import { isValidNumber } from '@/utils/validation.helper';
+import { toast } from 'sonner';
+import { ServerResponseType } from '@/lib/types/data.types';
+import { LocalStorageKeys, setDataToLocal } from '@/utils/localStorage.helper';
 import Link from 'next/link';
 
-type LoginFieldsType = {
-  email: string;
-  password: string;
-};
-
-type LoginFieldsNameType = 'email' | 'password';
-
 export default function LoginPage() {
-  const { register, handleSubmit, reset } = useForm<LoginFieldsType>({
-    defaultValues: { email: USER.email, password: USER.password },
-  });
-
   const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (data: LoginFieldsType) => {
-    // getting all users from local storage and merging them with default user
-    const users = getDataFromLocal<UserType[]>(LocalStorageKeys.USERS) || [];
-    users.push(USER);
-
-    // checking if any user matches from localData
+  const handleLoginAction = async (fromData: FormData) => {
+    const toastId = toast.loading('Logging In...');
     try {
-      const [user] = users.filter((user) => user.email === data.email);
-      if (!user) throw new Error('User not found');
-      if (user.password !== data.password) throw new Error('Wrong password');
+      setIsLoading(true);
+      const phone = fromData.get('phone');
 
-      // setting info to the local
-      setDataToLocal(LocalStorageKeys.USER, user);
-      toast.success('Successfully logged in!!');
+      if (!isValidNumber(phone as string))
+        throw new Error('Invalid Phone Number');
 
-      reset();
+      const response: ServerResponseType<{ token: string }> =
+        await LoginAction(fromData);
+
+      if (!response.ok) throw new Error(response.message);
+
+      setDataToLocal(LocalStorageKeys.USER, response?.data?.token);
+      toast.success(response.message);
       router.push('/');
+      router.refresh();
     } catch (err) {
       if (err instanceof Error) toast.error(err.message);
-      else toast.error('Something Went Wrong');
+      else toast.error(JSON.stringify(err));
+    } finally {
+      toast.dismiss(toastId);
+      setIsLoading(true);
     }
   };
 
@@ -65,7 +60,8 @@ export default function LoginPage() {
         </CardHeader>
         <CardContent>
           <form
-            onSubmit={handleSubmit(handleLogin)}
+            ref={formRef}
+            action={handleLoginAction}
             className='flex flex-col gap-3'
           >
             {logionFieldData.map(({ name, label, placeholder, type }) => (
@@ -75,7 +71,7 @@ export default function LoginPage() {
                   id={name}
                   placeholder={placeholder}
                   type={type}
-                  {...register(name as LoginFieldsNameType)}
+                  name={name}
                   required
                 />
               </div>
@@ -86,7 +82,9 @@ export default function LoginPage() {
                 Register
               </Link>
             </CardDescription>
-            <Button className='mt-5'>Login</Button>
+            <Button disabled={isLoading} className='mt-5'>
+              Login
+            </Button>
           </form>
         </CardContent>
       </Card>

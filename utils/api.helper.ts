@@ -11,5 +11,5 @@ export function sendSuccessResponse<DataType>({
 }
 
 export function sendErrorResponse(message: string) {
-  return { ok: false, message, data: null };
+  return { ok: false, message };
 }
