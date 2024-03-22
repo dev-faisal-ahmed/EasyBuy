@@ -6,7 +6,8 @@ import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Label } from '@radix-ui/react-label';
 import { Button } from '@/components/ui/button';
-import { useAppContext } from '@/context/AppContext';
+import { useAppDispatch } from '@/redux/redux.hook';
+import { filterProducts } from '@/redux/features/product.slice';
 
 type PriceFilterProps = { className?: string };
 
@@ -19,7 +20,7 @@ export function FilterProducts({ className }: PriceFilterProps) {
   const searchRef = useRef<HTMLInputElement>(null);
 
   const [range, setRange] = useState([min, max]);
-  const { dispatch } = useAppContext();
+  const dispatch = useAppDispatch();
 
   function updateMin(e: ChangeEvent<HTMLInputElement>) {
     const val = Number(e.target.value);
@@ -48,14 +49,13 @@ export function FilterProducts({ className }: PriceFilterProps) {
       keyWord: { value: string };
     };
 
-    dispatch({
-      type: 'FILTER',
-      payload: {
+    dispatch(
+      filterProducts({
         min: range[0],
         max: range[1],
         keyWord: formData.keyWord.value.trim(),
-      },
-    });
+      }),
+    );
 
     formData.reset();
     setRange([min, max]);

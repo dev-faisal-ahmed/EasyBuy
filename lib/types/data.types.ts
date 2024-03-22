@@ -24,3 +24,8 @@ export type ServerResponseType<DataType> = {
   message: string;
   data?: DataType;
 };
+
+export type CartType = {
+  product: ProductType;
+  count: number;
+};

@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Card,
   CardContent,
@@ -5,22 +7,27 @@ import {
   CardHeader,
   CardTitle,
 } from '../../ui/card';
-import Image from 'next/image';
 import { ProductType } from '@/lib/types/data.types';
 import { Button } from '../../ui/button';
 import { ShoppingCart as ShoppingCartIcon } from 'lucide-react';
 import { Ratting } from './Ratting';
+import Image from 'next/image';
 import Link from 'next/link';
+import { toast } from 'sonner';
+import { useAppDispatch } from '@/redux/redux.hook';
+import { addToCart } from '@/redux/features/cart.slice';
 
-export function ProductCard({
-  name,
-  image,
-  description,
-  discount,
-  price,
-  review,
-  productId,
-}: ProductType) {
+export function ProductCard(product: ProductType) {
+  const { name, image, description, discount, price, review, productId } =
+    product;
+
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ count: 1, product }));
+    toast.success(`${name} added to the cart`);
+  };
+
   return (
     <Card className='overflow-hidden'>
       <Image
@@ -45,7 +52,10 @@ export function ProductCard({
         {review && <Ratting className='mt-3' ratting={review.rating} />}
       </CardContent>
       <CardFooter className='flex items-center gap-3'>
-        <Button className='flex w-full items-center gap-2'>
+        <Button
+          onClick={handleAddToCart}
+          className='flex w-full items-center gap-2'
+        >
           <ShoppingCartIcon />
           Add To Cart
         </Button>

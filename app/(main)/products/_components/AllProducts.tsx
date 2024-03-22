@@ -4,21 +4,22 @@ import { SheetTrigger, Sheet, SheetContent } from '@/components/ui/sheet';
 import { ProductType } from '@/lib/types/data.types';
 import { FilterProducts } from './FilterProducts';
 import { Button } from '@/components/ui/button';
-import { useAppContext } from '@/context/AppContext';
 import { useEffect } from 'react';
 import { ProductCard } from '@/components/shared/product-card/ProductCard';
 import { Menu as MenuIcon } from 'lucide-react';
+import { useAppDispatch, useAppSelector } from '@/redux/redux.hook';
+import { updateProducts } from '@/redux/features/product.slice';
 
 type AllProductsProps = {
   allProducts: ProductType[];
 };
 
 export function AllProducts({ allProducts }: AllProductsProps) {
-  const { state, dispatch } = useAppContext();
-  const { isFiltered, products } = state;
+  const { products, isFiltered } = useAppSelector((state) => state.products);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch({ type: 'UPDATE_PRODUCTS', payload: allProducts });
+    dispatch(updateProducts(allProducts));
   }, [allProducts, dispatch]);
 
   return (

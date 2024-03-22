@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { WrapperType } from '@/lib/types/props.types';
 import { Toaster } from 'sonner';
-import { AppProvider } from '@/context/AppContext';
+import { AppProvider } from '@/redux/AppProvider';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
