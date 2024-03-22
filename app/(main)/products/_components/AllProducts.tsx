@@ -2,7 +2,7 @@
 
 import { SheetTrigger, Sheet, SheetContent } from '@/components/ui/sheet';
 import { ProductType } from '@/lib/types/data.types';
-import { PriceFilter } from './PriceFilter';
+import { FilterProducts } from './FilterProducts';
 import { Button } from '@/components/ui/button';
 import { useAppContext } from '@/context/AppContext';
 import { useEffect } from 'react';
@@ -23,25 +23,35 @@ export function AllProducts({ allProducts }: AllProductsProps) {
 
   return (
     <section className='my-6 flex gap-6'>
-      <PriceFilter className='hidden lg:block' />
+      {/* show this filter on large device */}
+      <FilterProducts className='hidden lg:block' />
       <div className='grid w-full grid-cols-1 gap-6 lg:grid-cols-2'>
         <div className='flex h-fit items-center gap-3 rounded-lg bg-white p-2 lg:col-span-2'>
+          {/* show this filter on small device */}
           <div className='lg:hidden'>
             <Sheet>
               <SheetTrigger className='cursor-pointer' asChild>
                 <MenuIcon />
               </SheetTrigger>
               <SheetContent side={'left'}>
-                <PriceFilter />
+                <FilterProducts />
               </SheetContent>
             </Sheet>
           </div>
+
           <h1 className='pl-2 text-base font-semibold'>Products</h1>
 
-          <Button disabled={isFiltered} size={'sm'} className='ml-auto'>
+          <Button
+            onClick={() => dispatch({ type: 'RESET_FILTER' })}
+            disabled={!isFiltered}
+            size={'sm'}
+            className='ml-auto'
+          >
             Reset Filter
           </Button>
         </div>
+
+        {/* all products */}
         <>
           {products.length ? (
             <>

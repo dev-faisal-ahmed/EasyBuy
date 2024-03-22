@@ -6,19 +6,20 @@ import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Label } from '@radix-ui/react-label';
 import { Button } from '@/components/ui/button';
+import { useAppContext } from '@/context/AppContext';
 
 type PriceFilterProps = { className?: string };
 
 const min = 0;
 const max = 99999;
 
-export function PriceFilter({ className }: PriceFilterProps) {
+export function FilterProducts({ className }: PriceFilterProps) {
   const minRef = useRef<HTMLInputElement>(null);
   const maxRef = useRef<HTMLInputElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
 
   const [range, setRange] = useState([min, max]);
-  // const { dispatch } = useAppContext();
+  const { dispatch } = useAppContext();
 
   function updateMin(e: ChangeEvent<HTMLInputElement>) {
     const val = Number(e.target.value);
@@ -41,16 +42,23 @@ export function PriceFilter({ className }: PriceFilterProps) {
     setRange([range[0], val]);
   }
 
-  function handleFiltering(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    // dispatch({
-    //   type: 'FILTER',
-    //   payload: {
-    //     min: range[0],
-    //     max: range[1],
-    //     keyword: searchRef?.current?.value as string,
-    //   },
-    // });
+  function handleFiltering(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = event.target as HTMLFormElement & {
+      keyWord: { value: string };
+    };
+
+    dispatch({
+      type: 'FILTER',
+      payload: {
+        min: range[0],
+        max: range[1],
+        keyWord: formData.keyWord.value.trim(),
+      },
+    });
+
+    formData.reset();
+    setRange([min, max]);
   }
 
   return (
@@ -61,18 +69,19 @@ export function PriceFilter({ className }: PriceFilterProps) {
       )}
     >
       <form onSubmit={handleFiltering}>
-        <label
+        <Label
           htmlFor='search'
           className='mb-3 block border-b border-gray-300 pb-1 font-bold uppercase'
         >
           Search KeyWord
-        </label>
+        </Label>
         <Input
           ref={searchRef}
           type='text'
           id='search'
           className=''
           placeholder='Search...'
+          name='keyWord'
         />
         <Label
           htmlFor='search'
