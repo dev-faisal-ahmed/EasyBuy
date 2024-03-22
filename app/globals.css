@@ -57,3 +57,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .slider {
+    @apply h-2 w-full rounded bg-gray-300;
+  }
+  .slider .thumb {
+    @apply -top-1 h-4 w-4 cursor-grab rounded-full border bg-primary;
+  }
+  .slider .track-1 {
+    @apply h-2 bg-primary/70;
+  }
+}

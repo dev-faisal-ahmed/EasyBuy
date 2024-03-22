@@ -18,7 +18,7 @@ export default function RootLayout({ children }: WrapperType) {
       <body
         className={cn(
           inter.className,
-          'min-h-screen bg-background text-sm antialiased',
+          'min-h-screen bg-slate-100 text-sm antialiased',
         )}
       >
         {children}

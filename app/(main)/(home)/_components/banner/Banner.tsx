@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export function Banner() {
   return (
-    <Container className='mt-8'>
+    <Container className='mt-8 w-full'>
       <div
         className='flex min-h-[500px] flex-col justify-center rounded-md bg-cover bg-no-repeat px-32 text-white'
         style={{ backgroundImage: `url(/images/banner.webp)` }}

@@ -4,10 +4,10 @@ import { Footer } from './_component/footer/Footer';
 
 export default function MainLayout({ children }: WrapperType) {
   return (
-    <>
+    <section className='relative flex min-h-screen flex-col'>
       <Navbar />
       {children}
-      <Footer />
-    </>
+      <Footer className='mt-auto' />
+    </section>
   );
 }

@@ -8,7 +8,7 @@ type NavLinkProps = {
 export function NavLink({ title, href, currentPath }: NavLinkProps) {
   return (
     <Link
-      href={title}
+      href={href}
       className={`px-1 font-medium ${href === currentPath ? 'border-b border-black' : ''}`}
     >
       {title}

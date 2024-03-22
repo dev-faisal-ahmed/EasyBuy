@@ -1,6 +1,11 @@
 'use client';
 
-import Link from 'next/link';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { Logo } from '@/components/shared/Logo';
 import { Container } from '@/components/ui/Container';
 import { usePathname } from 'next/navigation';
@@ -9,12 +14,7 @@ import { navLinks } from './lib/navLinks.data';
 import { ShoppingCart as ShoppingCartIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CgMenuLeftAlt } from 'react-icons/cg';
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+import Link from 'next/link';
 
 export function Navbar() {
   const pathName = usePathname();

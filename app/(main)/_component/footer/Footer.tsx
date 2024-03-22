@@ -1,10 +1,13 @@
 import { Container } from '@/components/ui/Container';
 import { MoveRight as MoveRightIcon } from 'lucide-react';
 import { contactUsTexts, getHelpTexts, socialIcons } from './footers.data';
+import { cn } from '@/lib/utils';
 
-export function Footer() {
+type FooterType = { className?: string };
+
+export function Footer({ className }: FooterType) {
   return (
-    <footer className='bg-black py-16 text-white'>
+    <footer className={cn('bg-black py-16 text-white', className)}>
       <Container className='flex flex-col justify-between gap-12 text-center lg:flex-row lg:text-left'>
         {/* info */}
         <div className='mx-auto w-full max-w-[250px] lg:mx-0 lg:max-w-fit'>
