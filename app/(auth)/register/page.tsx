@@ -9,7 +9,6 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { logionFieldData } from './lib/loginFiled.data';
 import { Button } from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
 import { USER } from '@/lib/data/sampleUser.data';
@@ -18,39 +17,53 @@ import { LocalStorageKeys } from '@/lib/data/localStorageKeys.data';
 import { UserType } from '@/lib/types/data.types';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { registerFieldData } from './lib/registerField.data';
 import Link from 'next/link';
 
-type LoginFieldsType = {
+type RegisterFieldsType = {
+  name: string;
   email: string;
   password: string;
+  confirmPassword: string;
 };
 
-type LoginFieldsNameType = 'email' | 'password';
+type LoginFieldsNameType = 'name' | 'email' | 'password' | 'confirmPassword';
 
-export default function LoginPage() {
-  const { register, handleSubmit, reset } = useForm<LoginFieldsType>({
-    defaultValues: { email: USER.email, password: USER.password },
-  });
+export default function RegisterPage() {
+  const { register, handleSubmit, reset } = useForm<RegisterFieldsType>();
 
   const router = useRouter();
 
-  const handleLogin = (data: LoginFieldsType) => {
+  const handleLogin = (data: RegisterFieldsType) => {
     // getting all users from local storage and merging them with default user
     const users = getDataFromLocal<UserType[]>(LocalStorageKeys.USERS) || [];
-    users.push(USER);
+    const usersWithDefaultUser = [USER, ...users];
 
-    // checking if any user matches from localData
     try {
-      const [user] = users.filter((user) => user.email === data.email);
-      if (!user) throw new Error('User not found');
-      if (user.password !== data.password) throw new Error('Wrong password');
+      // checking if user already exist
+      const [user] = usersWithDefaultUser.filter(
+        (user) => user.email === data.email,
+      );
+
+      if (user) throw new Error('User already Exist');
+
+      // checking if password matches with confirmPassword
+      if (data.password !== data.confirmPassword)
+        throw new Error('Password and Confirm Password does not match');
+
+      // adding new user to the collections
+      users.push({
+        name: data.name.trim(),
+        email: data.email.trim(),
+        password: data.password,
+      });
 
       // setting info to the local
-      setDataToLocal(LocalStorageKeys.USER, user);
-      toast.success('Successfully logged in!!');
+      setDataToLocal(LocalStorageKeys.USERS, users);
+      toast.success('Account Created!');
 
       reset();
-      router.push('/');
+      router.push('/login');
     } catch (err) {
       if (err instanceof Error) toast.error(err.message);
       else toast.error('Something Went Wrong');
@@ -61,14 +74,14 @@ export default function LoginPage() {
     <section className='flex min-h-screen flex-col items-center justify-center bg-slate-100'>
       <Card className='w-full max-w-[350px] border-none bg-transparent shadow-none sm:border sm:bg-card sm:shadow-sm'>
         <CardHeader>
-          <CardTitle className='mb-1 text-2xl'>Welcome Again!</CardTitle>
+          <CardTitle className='text-2xl'>Hi! There!</CardTitle>
         </CardHeader>
         <CardContent>
           <form
             onSubmit={handleSubmit(handleLogin)}
             className='flex flex-col gap-3'
           >
-            {logionFieldData.map(({ name, label, placeholder, type }) => (
+            {registerFieldData.map(({ name, label, placeholder, type }) => (
               <div className='space-y-2' key={name}>
                 <Label htmlFor={name}>{label}</Label>
                 <Input
@@ -81,12 +94,12 @@ export default function LoginPage() {
               </div>
             ))}
             <CardDescription className='text-center'>
-              Don&apos;t have any account?{' '}
-              <Link className='text-blue-500 underline' href={'/register'}>
-                Register
+              Already have an account?{' '}
+              <Link className='text-blue-500 underline' href={'/login'}>
+                Login
               </Link>
             </CardDescription>
-            <Button className='mt-5'>Login</Button>
+            <Button className='mt-5'>Register</Button>
           </form>
         </CardContent>
       </Card>
