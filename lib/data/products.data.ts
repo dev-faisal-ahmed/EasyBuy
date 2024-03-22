@@ -2,7 +2,7 @@ import { ProductType } from '../types/data.types';
 
 export const products: ProductType[] = [
   {
-    productId: 'p-1',
+    productId: 'p1',
     name: 'Intercom Telephone',
     image: 'https://i.ibb.co/6Wgbmfd/telephone.jpg',
     price: 17580,
@@ -14,7 +14,7 @@ export const products: ProductType[] = [
       'Stay connected with the sleek and efficient Intercom Telephone, featuring crystal-clear audio and user-friendly design.',
   },
   {
-    productId: 'p-2',
+    productId: 'p2',
     name: 'Intercom Speaker',
     image: 'https://i.ibb.co/F6sKNDn/speaker.jpg',
     price: 5280,
@@ -28,7 +28,7 @@ export const products: ProductType[] = [
   },
 
   {
-    productId: 'p-3',
+    productId: 'p3',
     name: 'Canon Camera',
     image: 'https://i.ibb.co/p2k0Y8f/camera.jpg',
     price: 53200,
@@ -42,7 +42,7 @@ export const products: ProductType[] = [
   },
 
   {
-    productId: 'p-4',
+    productId: 'p4',
     name: 'Macbook Air',
     image: 'https://i.ibb.co/tmBYYhm/laptop.jpg',
     price: 121500,

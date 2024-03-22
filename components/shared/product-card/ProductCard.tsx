@@ -1,7 +1,3 @@
-import Image from 'next/image';
-import { ProductType } from '@/lib/types/data.types';
-import { Button } from '../../ui/button';
-import { ShoppingCart as ShoppingCartIcon } from 'lucide-react';
 import {
   Card,
   CardContent,
@@ -9,7 +5,12 @@ import {
   CardHeader,
   CardTitle,
 } from '../../ui/card';
+import Image from 'next/image';
+import { ProductType } from '@/lib/types/data.types';
+import { Button } from '../../ui/button';
+import { ShoppingCart as ShoppingCartIcon } from 'lucide-react';
 import { Ratting } from './Ratting';
+import Link from 'next/link';
 
 export function ProductCard({
   name,
@@ -18,6 +19,7 @@ export function ProductCard({
   discount,
   price,
   review,
+  productId,
 }: ProductType) {
   return (
     <Card className='overflow-hidden'>
@@ -47,9 +49,11 @@ export function ProductCard({
           <ShoppingCartIcon />
           Add To Cart
         </Button>
-        <Button className='w-full' variant={'outline'}>
-          View Detail
-        </Button>
+        <Link className='w-full' href={`/products/${productId}`}>
+          <Button className='w-full' variant={'outline'}>
+            View Detail
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );

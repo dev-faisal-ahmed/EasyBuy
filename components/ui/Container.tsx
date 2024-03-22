@@ -10,7 +10,7 @@ export function Container({ children, className, style }: ContainerProps) {
   return (
     <section
       style={style}
-      className={cn('mx-auto max-w-[1200px] px-5', className)}
+      className={cn('mx-auto w-full max-w-[1200px] px-5', className)}
     >
       {children}
     </section>
