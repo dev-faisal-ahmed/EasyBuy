@@ -11,23 +11,29 @@ import { Dispatch, createContext, useContext, useReducer } from 'react';
 type AppStateType = {
   products: ProductType[];
   user: UserType | null;
+  isFiltered: boolean;
 };
 
 // initial state
 const initialState: AppStateType = {
   products: [] as ProductType[],
   user: getDataFromLocal(LocalStorageKeys.USER),
+  isFiltered: false,
 };
 
 // action types
 type ActionType =
   | { type: 'LOGIN_USER'; payload: UserType }
-  | { type: 'LOG_OUT_USER' };
+  | { type: 'LOG_OUT_USER' }
+  | { type: 'UPDATE_PRODUCTS'; payload: ProductType[] };
 
 function reducer(state: AppStateType, action: ActionType) {
   switch (action.type) {
     case 'LOGIN_USER':
       return { ...state, user: action.payload };
+
+    case 'UPDATE_PRODUCTS':
+      return { ...state, products: action.payload };
 
     default:
       return { ...state };

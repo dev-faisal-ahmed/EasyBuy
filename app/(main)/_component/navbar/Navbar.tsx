@@ -19,7 +19,7 @@ import Link from 'next/link';
 export function Navbar() {
   const pathName = usePathname();
   return (
-    <nav className='sticky top-0 border-b border-gray-300 bg-white py-5'>
+    <nav className='sticky top-0 z-10 border-b border-gray-300 bg-white py-5'>
       <Container className='flex items-center justify-between'>
         <Logo />
 
@@ -44,8 +44,12 @@ export function Navbar() {
               <SheetContent>
                 <div className='mt-5 flex flex-col gap-3'>
                   {navLinks.map((link) => (
-                    <SheetClose key={link.href}>
-                      <NavLink {...link} currentPath={pathName} />
+                    <SheetClose key={link.href} asChild>
+                      <NavLink
+                        className='w-fit'
+                        {...link}
+                        currentPath={pathName}
+                      />
                     </SheetClose>
                   ))}
 

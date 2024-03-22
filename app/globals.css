@@ -51,7 +51,7 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply scrollbar-thin scrollbar-track-primary/20 scrollbar-thumb-primary/50 border-border;
   }
   body {
     @apply bg-background text-foreground;
@@ -67,5 +67,8 @@
   }
   .slider .track-1 {
     @apply h-2 bg-primary/70;
+  }
+  .customized_scrollbar {
+    @apply scrollbar-thin scrollbar-track-primary-foreground scrollbar-thumb-primary-foreground/20;
   }
 }

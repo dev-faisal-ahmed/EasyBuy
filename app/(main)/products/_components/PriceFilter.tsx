@@ -56,7 +56,7 @@ export function PriceFilter({ className }: PriceFilterProps) {
   return (
     <div
       className={cn(
-        'sticky top-20 h-full w-full max-w-[320px] rounded-md bg-white p-4',
+        'sticky top-24 h-full w-full max-w-[320px] rounded-md bg-white p-4',
         className,
       )}
     >
