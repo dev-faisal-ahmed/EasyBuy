@@ -12,3 +12,9 @@ export type ProductType = {
   discount?: number;
   review?: ReviewType;
 };
+
+export type UserType = {
+  name: string;
+  email: string;
+  password: string;
+};

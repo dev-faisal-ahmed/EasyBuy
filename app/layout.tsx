@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { WrapperType } from '@/lib/types/props.types';
+import { Toaster } from 'sonner';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: WrapperType) {
         )}
       >
         {children}
+        <Toaster richColors />
       </body>
     </html>
   );
