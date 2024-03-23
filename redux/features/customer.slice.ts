@@ -16,7 +16,16 @@ export const CustomerSlice = createSlice({
     updateCustomers: (state, action: PayloadAction<CustomerType[]>) => {
       state.customers = action.payload;
     },
+
+    addCustomer: (state, action: PayloadAction<CustomerType>) => {
+      const [isCustomerExist] = state.customers.filter(
+        (customer) => customer.phone === action.payload.phone,
+      );
+
+      if (!isCustomerExist)
+        state.customers = [action.payload, ...state.customers];
+    },
   },
 });
 
-export const { updateCustomers } = CustomerSlice.actions;
+export const { updateCustomers, addCustomer } = CustomerSlice.actions;

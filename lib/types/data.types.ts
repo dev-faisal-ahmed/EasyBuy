@@ -41,9 +41,7 @@ export type SidebarLinkType = {
 export type CustomerStatusType = 'member' | 'gold' | 'platinum';
 
 export type CustomerType = {
-  customerId: string;
   name: string;
-  image: string;
   phone: string;
   address: string;
   purchase: {

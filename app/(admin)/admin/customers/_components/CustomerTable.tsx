@@ -34,10 +34,10 @@ export function CustomerTable({ allCustomers }: CustomerTableProps) {
         <Table className='w-full'>
           <TableHeader>
             <TableRow className='border-none'>
-              <TableHead className={cn(tableHeadClass, 'rounded-s-full')}>
-                Id
-              </TableHead>
-              <TableHead className={cn(tableHeadClass, 'text-left')}>
+             
+              <TableHead
+                className={cn(tableHeadClass, 'rounded-s-full text-left')}
+              >
                 User Info
               </TableHead>
               <TableHead className={cn(tableHeadClass, 'text-left')}>
@@ -49,13 +49,12 @@ export function CustomerTable({ allCustomers }: CustomerTableProps) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {customers.map(({ customerId, name, phone, userStatus }) => (
+            {customers.map(({ name, phone, userStatus }) => (
               <TableRow
-                onClick={() => router.push(`customers/${customerId}`)}
+                onClick={() => router.push(`customers/${phone}`)}
                 className='cursor-pointer border-0'
-                key={customerId}
+                key={phone}
               >
-                <TableCell className='text-center'>{customerId}</TableCell>
                 <TableCell className='flex items-center gap-5'>
                   <div>
                     <div className='flex size-8 items-center justify-center  rounded-full bg-gray-500 text-white'>

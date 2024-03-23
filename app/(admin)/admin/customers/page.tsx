@@ -1,6 +1,7 @@
 import { SERVER_ADDRESS } from '@/config/config';
 import { CustomerTable } from './_components/CustomerTable';
 import { CustomerType } from '@/lib/types/data.types';
+import { AddCustomer } from './_components/AddCustomer';
 
 const getProducts = async () => {
   const response = await fetch(`${SERVER_ADDRESS}/api/customers`);
@@ -13,9 +14,8 @@ export default async function CustomerPage() {
 
   return (
     <section className='px-5'>
-      <div className='overflow-auto'>
-        <CustomerTable allCustomers={customers} />
-      </div>
+      <AddCustomer />
+      <CustomerTable allCustomers={customers} />
     </section>
   );
 }

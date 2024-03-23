@@ -3,12 +3,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
   _: NextRequest,
-  { params }: { params: { customerId: string } },
+  { params }: { params: { phone: string } },
 ) {
-  const { customerId } = params;
-  const [customer] = customers.filter(
-    (customer) => customer.customerId === customerId,
-  );
+  const { phone } = params;
+  const [customer] = customers.filter((customer) => customer.phone === phone);
 
   return NextResponse.json(customer || null);
 }

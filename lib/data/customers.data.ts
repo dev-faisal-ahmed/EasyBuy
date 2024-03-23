@@ -2,9 +2,7 @@ import { CustomerType } from '../types/data.types';
 
 export const customers: CustomerType[] = [
   {
-    customerId: '001',
     name: 'John Doe',
-    image: 'john_doe.jpg',
     phone: '123-456-7890',
     address: '123 Main St, Anytown, USA',
     purchase: {
@@ -14,9 +12,7 @@ export const customers: CustomerType[] = [
     userStatus: 'member',
   },
   {
-    customerId: '002',
     name: 'Jane Smith',
-    image: 'jane_smith.jpg',
     phone: '987-654-3210',
     address: '456 Elm St, Othertown, USA',
     purchase: {
@@ -26,9 +22,7 @@ export const customers: CustomerType[] = [
     userStatus: 'gold',
   },
   {
-    customerId: '003',
     name: 'Alice Johnson',
-    image: 'alice_johnson.jpg',
     phone: '555-555-5555',
     address: '789 Oak St, Anothertown, USA',
     purchase: {
@@ -38,9 +32,7 @@ export const customers: CustomerType[] = [
     userStatus: 'platinum',
   },
   {
-    customerId: '004',
     name: 'Michael Brown',
-    image: 'michael_brown.jpg',
     phone: '222-222-2222',
     address: '321 Pine St, Yetanothertown, USA',
     purchase: {
@@ -50,9 +42,7 @@ export const customers: CustomerType[] = [
     userStatus: 'gold',
   },
   {
-    customerId: '005',
     name: 'Emily Davis',
-    image: 'emily_davis.jpg',
     phone: '333-333-3333',
     address: '456 Cedar St, Somewhereville, USA',
     purchase: {
@@ -62,9 +52,7 @@ export const customers: CustomerType[] = [
     userStatus: 'member',
   },
   {
-    customerId: '006',
     name: 'David Wilson',
-    image: 'david_wilson.jpg',
     phone: '444-444-4444',
     address: '789 Maple St, Overtherainbow, USA',
     purchase: {
@@ -74,9 +62,7 @@ export const customers: CustomerType[] = [
     userStatus: 'gold',
   },
   {
-    customerId: '007',
     name: 'Olivia Taylor',
-    image: 'olivia_taylor.jpg',
     phone: '666-666-6666',
     address: '987 Walnut St, Dreamland, USA',
     purchase: {
@@ -86,9 +72,7 @@ export const customers: CustomerType[] = [
     userStatus: 'platinum',
   },
   {
-    customerId: '008',
     name: 'James Martinez',
-    image: 'james_martinez.jpg',
     phone: '777-777-7777',
     address: '654 Birch St, Imaginarytown, USA',
     purchase: {
@@ -98,9 +82,7 @@ export const customers: CustomerType[] = [
     userStatus: 'gold',
   },
   {
-    customerId: '009',
     name: 'Sophia Anderson',
-    image: 'sophia_anderson.jpg',
     phone: '888-888-8888',
     address: '543 Oakwood Dr, Wonderland, USA',
     purchase: {
@@ -110,9 +92,7 @@ export const customers: CustomerType[] = [
     userStatus: 'platinum',
   },
   {
-    customerId: '010',
     name: 'William Thomas',
-    image: 'william_thomas.jpg',
     phone: '999-999-9999',
     address: '432 Forest Dr, Enchantedland, USA',
     purchase: {
@@ -122,9 +102,7 @@ export const customers: CustomerType[] = [
     userStatus: 'member',
   },
   {
-    customerId: '011',
     name: 'Charlotte White',
-    image: 'charlotte_white.jpg',
     phone: '101-010-1010',
     address: '876 Elmwood Ave, Magicville, USA',
     purchase: {
@@ -134,9 +112,7 @@ export const customers: CustomerType[] = [
     userStatus: 'platinum',
   },
   {
-    customerId: '012',
     name: 'Ethan Brown',
-    image: 'ethan_brown.jpg',
     phone: '202-020-2020',
     address: '765 Birchwood Ln, Fairytaleland, USA',
     purchase: {
@@ -146,9 +122,7 @@ export const customers: CustomerType[] = [
     userStatus: 'member',
   },
   {
-    customerId: '013',
     name: 'Ava Johnson',
-    image: 'ava_johnson.jpg',
     phone: '303-030-3030',
     address: '234 Oakwood Ct, Mysticalcity, USA',
     purchase: {
@@ -158,9 +132,7 @@ export const customers: CustomerType[] = [
     userStatus: 'gold',
   },
   {
-    customerId: '014',
     name: 'Mason Garcia',
-    image: 'mason_garcia.jpg',
     phone: '404-040-4040',
     address: '543 Elmwood Dr, Secrettown, USA',
     purchase: {
@@ -170,9 +142,7 @@ export const customers: CustomerType[] = [
     userStatus: 'gold',
   },
   {
-    customerId: '015',
     name: 'Harper Rodriguez',
-    image: 'harper_rodriguez.jpg',
     phone: '505-050-5050',
     address: '876 Pine Dr, Fairytown, USA',
     purchase: {
