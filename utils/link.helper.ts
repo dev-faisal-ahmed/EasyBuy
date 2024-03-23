@@ -8,4 +8,5 @@ const title: Record<string, string> = {
 export function generateTitle(url: string) {
   let pageTitle = title[url];
   if (pageTitle) return pageTitle;
+  if (url.includes('/customers')) return 'Customer Information';
 }

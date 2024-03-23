@@ -12,14 +12,17 @@ import { CustomerType } from '@/lib/types/data.types';
 import { cn } from '@/lib/utils';
 import { updateCustomers } from '@/redux/features/customer.slice';
 import { useAppDispatch, useAppSelector } from '@/redux/redux.hook';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 type CustomerTableProps = { allCustomers: CustomerType[] };
 
 export function CustomerTable({ allCustomers }: CustomerTableProps) {
-  const tableHeadClass = `bg-slate-100 text-center font-semibold uppercase whitespace-nowrap`;
   const { customers } = useAppSelector((state) => state.customers);
   const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const tableHeadClass = `bg-slate-100 text-center font-semibold uppercase whitespace-nowrap`;
 
   useEffect(() => {
     dispatch(updateCustomers(allCustomers));
@@ -47,7 +50,11 @@ export function CustomerTable({ allCustomers }: CustomerTableProps) {
           </TableHeader>
           <TableBody>
             {customers.map(({ customerId, name, phone, userStatus }) => (
-              <TableRow className='border-0' key={customerId}>
+              <TableRow
+                onClick={() => router.push(`customers/${customerId}`)}
+                className='cursor-pointer border-0'
+                key={customerId}
+              >
                 <TableCell className='text-center'>{customerId}</TableCell>
                 <TableCell className='flex items-center gap-5'>
                   <div>
