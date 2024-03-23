@@ -18,12 +18,6 @@ export const sidebarLinks: SidebarLinkType[] = [
     icon: <UsersIcon size={20} />,
   },
   {
-    title: 'Products',
-    href: '/admin/products',
-    icon: <SpeakerIcon size={20} />,
-  },
-
-  {
     title: 'Orders',
     href: '/admin/orders',
     icon: <ShoppingBasketIcon size={20} />,

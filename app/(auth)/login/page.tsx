@@ -65,18 +65,21 @@ export default function LoginPage() {
             action={handleLoginAction}
             className='flex flex-col gap-3'
           >
-            {logionFieldData.map(({ name, label, placeholder, type }) => (
-              <div className='space-y-2' key={name}>
-                <Label htmlFor={name}>{label}</Label>
-                <Input
-                  id={name}
-                  placeholder={placeholder}
-                  type={type}
-                  name={name}
-                  required
-                />
-              </div>
-            ))}
+            {logionFieldData.map(
+              ({ name, label, placeholder, type, defaultValue }) => (
+                <div className='space-y-2' key={name}>
+                  <Label htmlFor={name}>{label}</Label>
+                  <Input
+                    id={name}
+                    placeholder={placeholder}
+                    type={type}
+                    name={name}
+                    defaultValue={defaultValue}
+                    required
+                  />
+                </div>
+              ),
+            )}
             <CardDescription className='text-center'>
               Don&apos;t have any account?{' '}
               <Link className='text-blue-500 underline' href={'/register'}>
