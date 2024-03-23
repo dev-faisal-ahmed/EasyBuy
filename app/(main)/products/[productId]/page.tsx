@@ -6,7 +6,7 @@ import { ProductDetails } from './_components/ProductDetails';
 async function getSingleProduct(productId: string) {
   const response = await fetch(`${SERVER_ADDRESS}/api/products/${productId}`);
   const data = await response.json();
-  return data as ProductType;
+  return (data as ProductType) || null;
 }
 
 type ProfileProductPageProps = {
@@ -17,9 +17,14 @@ export default async function ProductDetailsPage({
   params: { productId },
 }: ProfileProductPageProps) {
   const product = await getSingleProduct(productId);
+
   return (
     <Container className='my-6'>
-      <ProductDetails {...product} />
+      {product ? (
+        <ProductDetails {...product} />
+      ) : (
+        <p className='text-center font-semibold'>No Product Found</p>
+      )}
     </Container>
   );
 }

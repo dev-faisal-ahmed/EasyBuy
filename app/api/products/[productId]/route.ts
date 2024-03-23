@@ -9,5 +9,5 @@ export async function GET(
   const [product] = products.filter(
     (product) => product.productId === productId,
   );
-  return NextResponse.json(product);
+  return NextResponse.json(product || null);
 }

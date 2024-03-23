@@ -26,7 +26,7 @@ export function CustomerTable({ allCustomers }: CustomerTableProps) {
   }, [allCustomers, dispatch]);
 
   return (
-    <div className='rounded-md bg-white p-5 shadow'>
+    <div className='my-5 rounded-md bg-white p-5 shadow'>
       {customers && customers.length ? (
         <Table className='w-full'>
           <TableHeader>
@@ -60,10 +60,7 @@ export function CustomerTable({ allCustomers }: CustomerTableProps) {
                 <TableCell>{phone}</TableCell>
                 <TableCell className={`text-center `}>
                   <span
-                    className={`rounded px-3 py-1 uppercase 
-                    ${userStatus === 'member' ? 'bg-blue-50 text-blue-500' : ''} 
-                    ${userStatus === 'gold' ? 'bg-yellow-50 text-yellow-500' : ''}
-                     ${userStatus === 'platinum' ? 'bg-green-50 text-green-500' : ''}`}
+                    className={`rounded  px-3 py-1 font-semibold uppercase`}
                   >
                     {userStatus}
                   </span>
