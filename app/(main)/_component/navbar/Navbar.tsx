@@ -10,11 +10,12 @@ import { Logo } from '@/components/shared/Logo';
 import { Container } from '@/components/ui/Container';
 import { usePathname } from 'next/navigation';
 import { NavLink } from './NavLink';
-import { navLinks } from './lib/navLinks.data';
+import { navLinks } from './navLinks.data';
 import { ShoppingCart as ShoppingCartIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CgMenuLeftAlt } from 'react-icons/cg';
 import Link from 'next/link';
+import { Cart } from './cart/Cart';
 
 export function Navbar() {
   const pathName = usePathname();
@@ -30,9 +31,8 @@ export function Navbar() {
               <NavLink key={link.href} {...link} currentPath={pathName} />
             ))}
           </div>
-          <Link href={'/cart'}>
-            <ShoppingCartIcon size={22} />
-          </Link>
+
+          <Cart />
 
           <div className='lg:hidden'>
             <Sheet>
