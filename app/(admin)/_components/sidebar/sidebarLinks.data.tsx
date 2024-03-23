@@ -13,8 +13,8 @@ export const sidebarLinks: SidebarLinkType[] = [
     icon: <LayoutDashboardIcon size={20} />,
   },
   {
-    title: 'Customer',
-    href: '/admin/customer',
+    title: 'Customers',
+    href: '/admin/customers',
     icon: <UsersIcon size={20} />,
   },
   {

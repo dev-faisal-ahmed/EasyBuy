@@ -26,8 +26,8 @@ export function PaymentInfo() {
 
   return (
     <div className='w-full'>
-      <h3 className='mb-5 text-lg font-semibold'>Payment</h3>
-      <div className='mx-auto w-full max-w-[450px] rounded-lg border-card bg-white p-8 shadow-sm'>
+      <h2 className='mb-3 mt-5 text-xl font-bold'>Payment</h2>
+      <div className='mx-auto w-full rounded-lg border-card bg-white p-8 shadow-sm'>
         <Label className='flex items-center gap-3'>
           <span className='text-2xl'>
             <FaCreditCard />

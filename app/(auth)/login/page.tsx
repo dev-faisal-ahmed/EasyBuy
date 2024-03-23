@@ -42,14 +42,13 @@ export default function LoginPage() {
       if (!response.ok) throw new Error(response.message);
 
       dispatch(updateUser(response.data?.token));
-      toast.success(response.message);
+      toast.success(response.message, { id: toastId });
       router.push('/');
       router.refresh();
     } catch (err) {
-      if (err instanceof Error) toast.error(err.message);
+      if (err instanceof Error) toast.error(err.message, { id: toastId });
       else toast.error(JSON.stringify(err));
     } finally {
-      toast.dismiss(toastId);
       setIsLoading(false);
     }
   };

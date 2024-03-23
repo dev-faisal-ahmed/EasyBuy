@@ -37,3 +37,18 @@ export type SidebarLinkType = {
   href: string;
   icon: ReactNode;
 };
+
+export type CustomerStatusType = 'member' | 'gold' | 'platinum';
+
+export type CustomerType = {
+  customerId: string;
+  name: string;
+  image: string;
+  phone: string;
+  address: string;
+  purchase: {
+    total: number;
+    totalSpent: number;
+  };
+  userStatus: CustomerStatusType;
+};

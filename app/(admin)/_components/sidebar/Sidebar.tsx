@@ -21,7 +21,7 @@ export function Sidebar({ className }: SidebarProps) {
   return (
     <aside
       className={cn(
-        'flex h-screen flex-col justify-between bg-white p-3',
+        'sticky left-0 top-0 flex h-screen flex-col justify-between bg-white p-3',
         className,
       )}
     >

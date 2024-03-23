@@ -21,11 +21,11 @@ export function CartItem({ product, count, className }: CartItemProps) {
 
   return (
     <div
-      className={cn('flex gap-5 rounded bg-slate-100 p-3 shadow', className)}
+      className={cn('flex gap-5 rounded-md bg-slate-100 p-3 shadow', className)}
     >
       <div>
         <Image
-          className='h-full rounded object-cover object-center'
+          className='h-full rounded-md object-cover object-center'
           src={image}
           width={80}
           height={50}

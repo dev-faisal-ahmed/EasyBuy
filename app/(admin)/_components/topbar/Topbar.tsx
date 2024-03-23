@@ -16,12 +16,6 @@ export function Topbar() {
   const { user } = useAppSelector((state) => state.user);
   return (
     <nav className='flex h-fit items-center justify-between p-6'>
-      <div className='flex items-center gap-2 font-semibold'>
-        <Link href={'/admin'} className='text-lg'>
-          <GoHomeFill />
-        </Link>
-        <span>/ {generateTitle(pathName)}</span>
-      </div>
       <div className='block md:hidden'>
         <Sheet>
           <SheetTrigger asChild>
@@ -31,6 +25,12 @@ export function Topbar() {
             <Sidebar className='border-none' />
           </SheetContent>
         </Sheet>
+      </div>
+      <div className='flex items-center gap-2 font-semibold'>
+        <Link href={'/admin'} className='text-lg'>
+          <GoHomeFill />
+        </Link>
+        <span>/ {generateTitle(pathName)}</span>
       </div>
       <ClientOnly>
         {user && (

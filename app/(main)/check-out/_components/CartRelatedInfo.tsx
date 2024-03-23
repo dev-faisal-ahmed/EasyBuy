@@ -1,6 +1,8 @@
 import { useAppSelector } from '@/redux/redux.hook';
 import { useMemo } from 'react';
 import { CartItem } from '../../_component/navbar/cart/CartItem';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 export function CartRelatedInfo() {
   const { cart } = useAppSelector((state) => state.cart);
@@ -16,7 +18,6 @@ export function CartRelatedInfo() {
 
   return (
     <div className='w-full'>
-      <h3 className='text-lg font-semibold'>Check Out</h3>
       {cart.length ? (
         <>
           <h2 className='mb-3 mt-5 text-xl font-bold'>Order Details</h2>
@@ -29,14 +30,14 @@ export function CartRelatedInfo() {
               />
             ))}
           </div>
-          <div className='mt-6'>
+          <div className='mt-6 rounded-md bg-white p-6'>
             <BetweenContainer title='Subtotal' value={subTotal} />
             <BetweenContainer title='Tax' value={subTotal * 0.05} />
-            <hr />
-            <BetweenContainer
-              title='Total'
-              value={subTotal + subTotal * 0.05}
-            />
+            <div className='mb-2' />
+            <div className='mt-5 flex w-full cursor-pointer items-center justify-between rounded-md bg-primary px-3 py-2 text-base font-semibold text-white'>
+              <p>Total</p>
+              <p>{subTotal + subTotal * 0.05} ৳</p>
+            </div>
           </div>
         </>
       ) : (
@@ -51,13 +52,20 @@ export function CartRelatedInfo() {
 type BetweenContainerProps = {
   title: string;
   value: number;
+  titleClass?: string;
+  valueClass?: string;
 };
 
-function BetweenContainer({ title, value }: BetweenContainerProps) {
+function BetweenContainer({
+  title,
+  value,
+  titleClass,
+  valueClass,
+}: BetweenContainerProps) {
   return (
-    <div className='flex items-center justify-between text-base font-semibold'>
-      <p className='text-gray-700'>{title}</p>
-      <p>{value} ৳</p>
+    <div className='flex items-center justify-between px-4 text-base font-semibold'>
+      <p className={cn('text-gray-600', titleClass)}>{title}</p>
+      <p className={cn('text-gray-600', valueClass)}>{value} ৳</p>
     </div>
   );
 }

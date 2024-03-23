@@ -8,9 +8,9 @@ export default function AdminLayout({ children }: WrapperType) {
     <AutGuard>
       <section className='grid grid-cols-[auto_1fr]'>
         <div>
-          <Sidebar />
+          <Sidebar className='hidden lg:flex' />
         </div>
-        <section>
+        <section className='w-full overflow-hidden'>
           <Topbar />
           <main>{children}</main>
         </section>
