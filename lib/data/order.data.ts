@@ -1,0 +1,77 @@
+import { OrderType } from '../types/data.types';
+
+export const orders: OrderType[] = [
+  {
+    orderId: '001',
+    name: 'John Wick',
+    products: ['Product A', 'Product B'],
+    price: 50,
+    status: 'pending',
+  },
+  {
+    orderId: '002',
+    name: 'John Cena',
+    products: ['Product C'],
+    price: 30,
+    status: 'delivered',
+    discount: 5,
+  },
+  {
+    orderId: '003',
+    name: 'Bruce Banner',
+    products: ['Product D', 'Product E', 'Product F'],
+    price: 100,
+    status: 'pending',
+  },
+  {
+    orderId: '004',
+    name: 'Barry Allen',
+    products: ['Product G'],
+    price: 20,
+    status: 'cancelled',
+  },
+  {
+    orderId: '005',
+    name: 'Clark Kent',
+    products: ['Product H', 'Product I'],
+    price: 75,
+    status: 'delivered',
+    discount: 10,
+  },
+  {
+    orderId: '006',
+    name: 'Tony Stark',
+    products: ['Product J'],
+    price: 40,
+    status: 'pending',
+  },
+  {
+    orderId: '007',
+    name: 'Dr. Stephen Stranger',
+    products: ['Product K', 'Product L'],
+    price: 60,
+    status: 'delivered',
+  },
+  {
+    orderId: '008',
+    name: 'Thor',
+    products: ['Product M'],
+    price: 25,
+    status: 'cancelled',
+  },
+  {
+    orderId: '009',
+    name: 'Bruce Wayne',
+    products: ['Product N', 'Product O'],
+    price: 90,
+    status: 'delivered',
+  },
+  {
+    orderId: '010',
+    name: 'Monkey D. Luffy',
+    products: ['Product P', 'Product Q', 'Product R'],
+    price: 120,
+    status: 'pending',
+    discount: 15,
+  },
+];

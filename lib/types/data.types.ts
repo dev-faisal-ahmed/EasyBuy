@@ -54,6 +54,7 @@ export type CustomerType = {
 export type OrderStatus = 'pending' | 'delivered' | 'cancelled';
 
 export type OrderType = {
+  orderId: string;
   name: string;
   products: string[];
   price: number;
