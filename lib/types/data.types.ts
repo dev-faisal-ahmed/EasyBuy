@@ -50,3 +50,13 @@ export type CustomerType = {
   };
   userStatus: CustomerStatusType;
 };
+
+export type OrderStatus = 'pending' | 'delivered' | 'cancelled';
+
+export type OrderType = {
+  name: string;
+  products: string[];
+  price: number;
+  status: OrderStatus;
+  discount?: number;
+};
