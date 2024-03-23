@@ -4,6 +4,7 @@ import { JWT_SECRET } from '@/config/config';
 import { connectDB } from '@/lib/db/connectDb';
 import { UserModel } from '@/lib/db/model/userModel';
 import { sendErrorResponse, sendSuccessResponse } from '@/utils/api.helper';
+import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 
 export async function LoginAction(formData: FormData) {
@@ -21,6 +22,8 @@ export async function LoginAction(formData: FormData) {
 
     const { name } = user.toObject();
     const token = jwt.sign({ name, phone }, JWT_SECRET!, { expiresIn: '60d' });
+
+    cookies().set('token', token);
 
     return sendSuccessResponse({
       data: { token },

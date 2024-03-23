@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/shared/product-card/ProductCard';
 import { Menu as MenuIcon } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '@/redux/redux.hook';
+import { filterReset } from '@/redux/features/product.slice';
 
 export function AllProducts() {
   const { products, isFiltered } = useAppSelector((state) => state.products);
@@ -32,7 +33,7 @@ export function AllProducts() {
           <h1 className='pl-2 text-base font-semibold'>Products</h1>
 
           <Button
-            onClick={() => dispatch({ type: 'RESET_FILTER' })}
+            onClick={() => dispatch(filterReset())}
             disabled={!isFiltered}
             size={'sm'}
             className='ml-auto'
@@ -42,19 +43,17 @@ export function AllProducts() {
         </div>
 
         {/* all products */}
-        <>
-          {products.length ? (
-            <>
-              {products.map((product) => (
-                <ProductCard key={product.productId} {...product} />
-              ))}
-            </>
-          ) : (
-            <p className='col-span-2 text-center text-lg font-semibold'>
-              No Products Found
-            </p>
-          )}
-        </>
+        {products.length ? (
+          <>
+            {products.map((product) => (
+              <ProductCard key={product.productId} {...product} />
+            ))}
+          </>
+        ) : (
+          <p className='col-span-2 text-center font-semibold'>
+            No Product Found
+          </p>
+        )}
       </div>
     </section>
   );

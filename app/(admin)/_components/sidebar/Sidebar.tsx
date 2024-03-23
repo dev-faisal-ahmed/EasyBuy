@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import { Logo } from '@/components/shared/Logo';
 import { SidebarLink } from './SidebarLink';
 import { sidebarLinks } from './sidebarLinks.data';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { LogOut as LogOutIcon } from 'lucide-react';
 import { useAppDispatch } from '@/redux/redux.hook';
@@ -17,6 +17,13 @@ type SidebarProps = {
 export function Sidebar({ className }: SidebarProps) {
   const pathname = usePathname();
   const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    dispatch(removeUser());
+    router.push('/login');
+    router.refresh();
+  };
 
   return (
     <aside
@@ -32,7 +39,7 @@ export function Sidebar({ className }: SidebarProps) {
         ))}
       </div>
       <Button
-        onClick={() => dispatch(removeUser())}
+        onClick={handleLogout}
         className='mt-auto flex items-center gap-2 rounded bg-destructive'
       >
         <LogOutIcon /> <span>Log Out</span>

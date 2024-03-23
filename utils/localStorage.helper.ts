@@ -8,7 +8,7 @@ export function getDataFromLocal<DataType>(key: LocalStorageKeys) {
   const dataFromLocal = window.localStorage.getItem(key);
   if (!dataFromLocal) return null;
 
-  return JSON.parse(dataFromLocal) as DataType;
+  return JSON.parse(dataFromLocal || '') as DataType;
 }
 
 export function setDataToLocal(key: LocalStorageKeys, data: unknown) {

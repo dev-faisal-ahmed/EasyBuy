@@ -13,6 +13,7 @@ import { cartCount } from '@/utils/cart.helper';
 import { addToCartAndReplaceCount } from '@/redux/features/cart.slice';
 import Link from 'next/link';
 import Image from 'next/image';
+import { toast } from 'sonner';
 
 export function ProductDetails(product: ProductType) {
   const { name, image, price, review, discount, description, productId } =
@@ -20,12 +21,17 @@ export function ProductDetails(product: ProductType) {
   const { cart } = useAppSelector((state) => state.cart);
 
   const dispatch = useAppDispatch();
-
   const [counter, setCounter] = useState(cartCount(cart, productId));
 
   useEffect(() => {
     setCounter(cartCount(cart, productId));
   }, [cart, productId]);
+
+  const handleAddProduct = () => {
+    if (counter === 0) return toast.error('Counter should be more than zero');
+    dispatch(addToCartAndReplaceCount({ count: counter, product }));
+    toast.success(`${name} added to the cart`);
+  };
 
   return (
     <>
@@ -97,9 +103,7 @@ export function ProductDetails(product: ProductType) {
               </Button>
             </div>
             <Button
-              onClick={() =>
-                dispatch(addToCartAndReplaceCount({ count: counter, product }))
-              }
+              onClick={handleAddProduct}
               className='flex items-center gap-2'
             >
               <FaCartShopping /> Add To Cart

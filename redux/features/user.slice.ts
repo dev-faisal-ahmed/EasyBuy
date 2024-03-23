@@ -6,6 +6,7 @@ import {
 import { UserType } from '@/lib/types/data.types';
 import { getUserFormToken } from '@/utils/token.helper';
 import { createSlice } from '@reduxjs/toolkit';
+import { jwtDecode } from 'jwt-decode';
 
 type UserSliceType = {
   user: Omit<UserType, 'password'> | null;
@@ -19,7 +20,7 @@ export const UserSlice = createSlice({
   initialState,
   reducers: {
     updateUser: (state, action) => {
-      state.user = getUserFormToken();
+      state.user = jwtDecode(action.payload);
       setDataToLocal(LocalStorageKeys.USER, action.payload);
     },
 

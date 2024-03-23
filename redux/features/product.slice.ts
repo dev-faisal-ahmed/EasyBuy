@@ -9,7 +9,7 @@ type ProductSliceType = {
 };
 
 const initialState: ProductSliceType = {
-  products: [],
+  products: products,
   allProducts: products,
   isFiltered: false,
 };

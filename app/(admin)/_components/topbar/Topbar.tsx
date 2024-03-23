@@ -8,8 +8,8 @@ import { usePathname } from 'next/navigation';
 import { generateTitle } from '@/utils/link.helper';
 import { useAppSelector } from '@/redux/redux.hook';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import Link from 'next/link';
 import { ClientOnly } from '@/components/shared/ClientOnly';
+import Link from 'next/link';
 
 export function Topbar() {
   const pathName = usePathname();
@@ -27,10 +27,10 @@ export function Topbar() {
         </Sheet>
       </div>
       <div className='flex items-center gap-2 font-semibold'>
-        <Link href={'/admin'} className='text-lg'>
+        <Link href={'/'} className='text-lg'>
           <GoHomeFill />
         </Link>
-        <span>/ {generateTitle(pathName)}</span>
+        <span> / {generateTitle(pathName)}</span>
       </div>
       <ClientOnly>
         {user && (
