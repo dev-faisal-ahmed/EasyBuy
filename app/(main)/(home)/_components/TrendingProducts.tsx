@@ -1,5 +1,5 @@
 import { ProductCard } from '@/components/shared/product-card/ProductCard';
-import { Container } from '@/components/ui/Container';
+import { Container } from '@/components/shared/Container';
 import { products } from '@/lib/data/products.data';
 import Link from 'next/link';
 

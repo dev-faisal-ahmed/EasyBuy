@@ -1,4 +1,4 @@
-import { Container } from '@/components/ui/Container';
+import { Container } from '@/components/shared/Container';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 

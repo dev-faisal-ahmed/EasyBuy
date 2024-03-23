@@ -1,10 +1,17 @@
+'use client';
+
 import { CartType } from '@/lib/types/data.types';
+import { cn } from '@/lib/utils';
 import { addToCart } from '@/redux/features/cart.slice';
 import { useAppDispatch } from '@/redux/redux.hook';
 import { Minus as MinusIcon, Plus as PlusIcon, X as XIcon } from 'lucide-react';
 import Image from 'next/image';
 
-export function CartItem({ product, count }: CartType) {
+type CartItemProps = CartType & {
+  className?: string;
+};
+
+export function CartItem({ product, count, className }: CartItemProps) {
   const { image, name } = product;
   const dispatch = useAppDispatch();
 
@@ -13,7 +20,9 @@ export function CartItem({ product, count }: CartType) {
   };
 
   return (
-    <div className='flex gap-5 rounded bg-slate-100 p-3'>
+    <div
+      className={cn('flex gap-5 rounded bg-slate-100 p-3 shadow', className)}
+    >
       <div>
         <Image
           className='h-full rounded object-cover object-center'

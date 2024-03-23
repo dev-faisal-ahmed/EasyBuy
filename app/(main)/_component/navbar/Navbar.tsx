@@ -7,15 +7,15 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Logo } from '@/components/shared/Logo';
-import { Container } from '@/components/ui/Container';
+import { Container } from '@/components/shared/Container';
 import { usePathname } from 'next/navigation';
 import { NavLink } from './NavLink';
 import { navLinks } from './navLinks.data';
-import { ShoppingCart as ShoppingCartIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CgMenuLeftAlt } from 'react-icons/cg';
-import Link from 'next/link';
 import { Cart } from './cart/Cart';
+import { ClientOnly } from '@/components/shared/ClientOnly';
+import Link from 'next/link';
 
 export function Navbar() {
   const pathName = usePathname();
@@ -32,7 +32,9 @@ export function Navbar() {
             ))}
           </div>
 
-          <Cart />
+          <ClientOnly>
+            <Cart />
+          </ClientOnly>
 
           <div className='lg:hidden'>
             <Sheet>

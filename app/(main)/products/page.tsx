@@ -1,4 +1,4 @@
-import { Container } from '@/components/ui/Container';
+import { Container } from '@/components/shared/Container';
 import { AllProducts } from './_components/AllProducts';
 import { SERVER_ADDRESS } from '@/config/config';
 import { ProductType } from '@/lib/types/data.types';

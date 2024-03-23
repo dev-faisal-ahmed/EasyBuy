@@ -1,4 +1,4 @@
-import { Container } from '@/components/ui/Container';
+import { Container } from '@/components/shared/Container';
 import { MoveRight as MoveRightIcon } from 'lucide-react';
 import { contactUsTexts, getHelpTexts, socialIcons } from './footers.data';
 import { cn } from '@/lib/utils';
