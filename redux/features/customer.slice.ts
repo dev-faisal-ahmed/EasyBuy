@@ -1,3 +1,4 @@
+import { customers } from '@/lib/data/customers.data';
 import { CustomerType } from '@/lib/types/data.types';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
@@ -6,7 +7,7 @@ type CustomerSliceType = {
 };
 
 const initialState: CustomerSliceType = {
-  customers: [],
+  customers: customers,
 };
 
 export const CustomerSlice = createSlice({

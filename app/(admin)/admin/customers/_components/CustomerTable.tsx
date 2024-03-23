@@ -8,25 +8,15 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { CustomerType } from '@/lib/types/data.types';
 import { cn } from '@/lib/utils';
-import { updateCustomers } from '@/redux/features/customer.slice';
-import { useAppDispatch, useAppSelector } from '@/redux/redux.hook';
+import { useAppSelector } from '@/redux/redux.hook';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
-type CustomerTableProps = { allCustomers: CustomerType[] };
-
-export function CustomerTable({ allCustomers }: CustomerTableProps) {
+export function CustomerTable() {
   const { customers } = useAppSelector((state) => state.customers);
-  const dispatch = useAppDispatch();
   const router = useRouter();
 
   const tableHeadClass = `bg-slate-100 text-center font-semibold uppercase whitespace-nowrap`;
-
-  useEffect(() => {
-    dispatch(updateCustomers(allCustomers));
-  }, [allCustomers, dispatch]);
 
   return (
     <div className='my-5 rounded-md bg-white p-5 shadow'>
@@ -34,7 +24,6 @@ export function CustomerTable({ allCustomers }: CustomerTableProps) {
         <Table className='w-full'>
           <TableHeader>
             <TableRow className='border-none'>
-             
               <TableHead
                 className={cn(tableHeadClass, 'rounded-s-full text-left')}
               >
