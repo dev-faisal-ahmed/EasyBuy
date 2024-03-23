@@ -9,4 +9,5 @@ export function generateTitle(url: string) {
   let pageTitle = title[url];
   if (pageTitle) return pageTitle;
   if (url.includes('/customers')) return 'Customer Information';
+  if (url.includes('/orders')) return 'Order Information';
 }

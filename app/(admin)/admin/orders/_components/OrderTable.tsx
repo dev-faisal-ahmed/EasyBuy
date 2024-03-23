@@ -39,7 +39,7 @@ export function OrdersTable() {
         <TableBody>
           {orders.map(({ orderId, name, price, status }) => (
             <TableRow
-              onClick={() => router.push(`customers/${orderId}`)}
+              onClick={() => router.push(`orders/${orderId}`)}
               className='cursor-pointer border-0'
               key={orderId}
             >
