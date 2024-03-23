@@ -8,11 +8,11 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { FaCartShopping, FaPlus } from 'react-icons/fa6';
 import { FaMinus } from 'react-icons/fa';
-import Link from 'next/link';
-import Image from 'next/image';
 import { useAppDispatch, useAppSelector } from '@/redux/redux.hook';
 import { cartCount } from '@/utils/cart.helper';
 import { addToCartAndReplaceCount } from '@/redux/features/cart.slice';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export function ProductDetails(product: ProductType) {
   const { name, image, price, review, discount, description, productId } =

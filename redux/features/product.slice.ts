@@ -1,3 +1,4 @@
+import { products } from '@/lib/data/products.data';
 import { ProductType } from '@/lib/types/data.types';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
@@ -9,7 +10,7 @@ type ProductSliceType = {
 
 const initialState: ProductSliceType = {
   products: [],
-  allProducts: [],
+  allProducts: products,
   isFiltered: false,
 };
 
@@ -17,15 +18,6 @@ export const ProductSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    updateProducts: (
-      state: ProductSliceType,
-      action: PayloadAction<ProductType[]>,
-    ) => {
-      state.allProducts = action.payload;
-      state.products = action.payload;
-      state.isFiltered = false;
-    },
-
     filterProducts: (
       state: ProductSliceType,
       action: PayloadAction<{ min: number; max: number; keyWord: string }>,
@@ -57,5 +49,4 @@ export const ProductSlice = createSlice({
   },
 });
 
-export const { updateProducts, filterProducts, filterReset } =
-  ProductSlice.actions;
+export const { filterProducts, filterReset } = ProductSlice.actions;
