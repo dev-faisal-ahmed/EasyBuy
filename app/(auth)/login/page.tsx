@@ -17,13 +17,15 @@ import { LoginAction } from './login.action';
 import { isValidNumber } from '@/utils/validation.helper';
 import { toast } from 'sonner';
 import { ServerResponseType } from '@/lib/types/data.types';
-import { LocalStorageKeys, setDataToLocal } from '@/utils/localStorage.helper';
+import { useAppDispatch } from '@/redux/redux.hook';
+import { updateUser } from '@/redux/features/user.slice';
 import Link from 'next/link';
 
 export default function LoginPage() {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleLoginAction = async (fromData: FormData) => {
     const toastId = toast.loading('Logging In...');
@@ -39,7 +41,7 @@ export default function LoginPage() {
 
       if (!response.ok) throw new Error(response.message);
 
-      setDataToLocal(LocalStorageKeys.USER, response?.data?.token);
+      dispatch(updateUser(response.data?.token));
       toast.success(response.message);
       router.push('/');
       router.refresh();
@@ -48,7 +50,7 @@ export default function LoginPage() {
       else toast.error(JSON.stringify(err));
     } finally {
       toast.dismiss(toastId);
-      setIsLoading(true);
+      setIsLoading(false);
     }
   };
 

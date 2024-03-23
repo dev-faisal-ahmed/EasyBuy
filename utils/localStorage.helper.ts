@@ -12,6 +12,9 @@ export function getDataFromLocal<DataType>(key: LocalStorageKeys) {
 }
 
 export function setDataToLocal(key: LocalStorageKeys, data: unknown) {
-  console.log({ key, data });
   localStorage.setItem(key, JSON.stringify(data));
+}
+
+export function removeDataFormLocal(key: LocalStorageKeys) {
+  localStorage.removeItem(key);
 }

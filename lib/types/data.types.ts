@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 type ReviewType = {
   rating: number;
   reviewCount: number;
@@ -28,4 +30,10 @@ export type ServerResponseType<DataType> = {
 export type CartType = {
   product: ProductType;
   count: number;
+};
+
+export type SidebarLinkType = {
+  title: string;
+  href: string;
+  icon: ReactNode;
 };
