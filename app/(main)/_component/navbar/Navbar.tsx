@@ -8,17 +8,31 @@ import {
 } from '@/components/ui/sheet';
 import { Logo } from '@/components/shared/Logo';
 import { Container } from '@/components/shared/Container';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { NavLink } from './NavLink';
 import { navLinks } from './navLinks.data';
 import { Button } from '@/components/ui/button';
 import { CgMenuLeftAlt } from 'react-icons/cg';
 import { Cart } from './cart/Cart';
 import { ClientOnly } from '@/components/shared/ClientOnly';
+import { useAppDispatch, useAppSelector } from '@/redux/redux.hook';
 import Link from 'next/link';
+import { removeUser } from '@/redux/features/user.slice';
+import { LogoutAction } from '@/action/logout.action';
+import { toast } from 'sonner';
 
 export function Navbar() {
   const pathName = usePathname();
+  const { user } = useAppSelector((state) => state.user);
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const handleLogout = async () => {
+    dispatch(removeUser());
+    LogoutAction();
+    toast.success('Logged out');
+  };
+
   return (
     <nav className='sticky top-0 z-10 border-b border-gray-300 bg-white py-5'>
       <Container className='flex items-center justify-between'>
@@ -55,17 +69,27 @@ export function Navbar() {
                     </SheetClose>
                   ))}
 
-                  <Link href={'/login'}>
-                    <Button className='mt-3 w-full'>Login</Button>
-                  </Link>
+                  {user ? (
+                    <Button onClick={handleLogout}>Logout</Button>
+                  ) : (
+                    <Link className='w-full' href={'/login'}>
+                      <Button className='w-full'>Login</Button>
+                    </Link>
+                  )}
                 </div>
               </SheetContent>
             </Sheet>
           </div>
 
-          <Link className='hidden lg:block' href={'/login'}>
-            <Button>Login</Button>
-          </Link>
+          {user ? (
+            <Button onClick={handleLogout} className='hidden lg:block'>
+              Logout
+            </Button>
+          ) : (
+            <Link className='hidden lg:block' href={'/login'}>
+              <Button>Login</Button>
+            </Link>
+          )}
         </div>
       </Container>
     </nav>

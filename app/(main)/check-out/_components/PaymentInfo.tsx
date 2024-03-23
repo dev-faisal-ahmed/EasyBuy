@@ -11,18 +11,25 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { useState } from 'react';
+import { useAppDispatch } from '@/redux/redux.hook';
+import { emptyCart } from '@/redux/features/cart.slice';
 
 export function PaymentInfo() {
   const router = useRouter();
 
+  const [value, setValue] = useState<string>();
+  const dispatch = useAppDispatch();
+
   const handleClick = () => {
+    console.log(value);
     if (value && value?.length < 4)
       return toast.error('Pleas input your card number first');
+
     toast.success('Order Places successfully');
+    dispatch(emptyCart());
+    setValue('');
     router.push('/');
   };
-
-  const [value, setValue] = useState<string>();
 
   return (
     <div className='w-full'>

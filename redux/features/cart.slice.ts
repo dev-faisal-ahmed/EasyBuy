@@ -64,8 +64,16 @@ export const CartSlice = createSlice({
       state.cart = state.cart.filter((cart) => cart.count > 0);
       setDataToLocal(LocalStorageKeys.CART, state.cart);
     },
+
+    emptyCart: (state) => {
+      state.cart = [];
+    },
   },
 });
 
-export const { addToCart, removeFromCart, addToCartAndReplaceCount } =
-  CartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  addToCartAndReplaceCount,
+  emptyCart,
+} = CartSlice.actions;

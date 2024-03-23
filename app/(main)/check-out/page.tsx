@@ -11,8 +11,8 @@ export default function CheckOutPage() {
     <Container className='my-6 flex flex-col gap-6 lg:flex-row'>
       <ClientOnly>
         <CartRelatedInfo />
+        <PaymentInfo />
       </ClientOnly>
-      <PaymentInfo />
     </Container>
   );
 }
