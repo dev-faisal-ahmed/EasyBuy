@@ -38,7 +38,7 @@ export default function RegisterPage() {
       if (password !== confirmPassword)
         throw new Error('Confirm Password and Password does not match');
 
-      const response: ServerResponseType = await RegisterAction(formData);
+      const response: ServerResponseType<null> = await RegisterAction(formData);
 
       if (!response.ok) throw new Error(response.message);
       toast.success(response.message, { id: toastId });
