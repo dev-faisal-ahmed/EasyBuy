@@ -20,7 +20,7 @@ export function Cart() {
       <SheetTrigger asChild>
         <span className='relative cursor-pointer'>
           <ShoppingCartIcon size={22} />
-          {cart.length && (
+          {cart.length > 0 && (
             <span className='absolute -right-3 -top-3 flex size-5 items-center justify-center rounded-full bg-primary text-white'>
               {cart.length}
             </span>

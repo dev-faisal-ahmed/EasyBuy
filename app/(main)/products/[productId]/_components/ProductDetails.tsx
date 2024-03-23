@@ -1,6 +1,8 @@
+'use client';
+
 import { ProductType } from '@/lib/types/data.types';
 import { GoHomeFill } from 'react-icons/go';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { Ratting } from '@/components/shared/product-card/Ratting';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -8,15 +10,23 @@ import { FaCartShopping, FaPlus } from 'react-icons/fa6';
 import { FaMinus } from 'react-icons/fa';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAppDispatch, useAppSelector } from '@/redux/redux.hook';
+import { cartCount } from '@/utils/cart.helper';
+import { addToCartAndReplaceCount } from '@/redux/features/cart.slice';
 
-export function ProductDetails({
-  name,
-  image,
-  price,
-  review,
-  discount,
-  description,
-}: ProductType) {
+export function ProductDetails(product: ProductType) {
+  const { name, image, price, review, discount, description, productId } =
+    product;
+  const { cart } = useAppSelector((state) => state.cart);
+
+  const dispatch = useAppDispatch();
+
+  const [counter, setCounter] = useState(cartCount(cart, productId));
+
+  useEffect(() => {
+    setCounter(cartCount(cart, productId));
+  }, [cart, productId]);
+
   return (
     <>
       <div className='mb-3 flex items-center gap-2'>
@@ -67,15 +77,31 @@ export function ProductDetails({
           )}
           <div className='mt-5 flex flex-col gap-8 lg:flex-row'>
             <div className='flex items-center gap-4'>
-              <Button variant={'outline'}>
+              <Button
+                onClick={() => setCounter((prev) => prev + 1)}
+                variant={'outline'}
+              >
                 <FaPlus />
               </Button>
-              <Input defaultValue={1} className='text-center' type='number' />
-              <Button variant={'outline'}>
+              <Input
+                className='text-center'
+                type='number'
+                value={counter}
+                onChange={(e) => setCounter(Number(e.target.value))}
+              />
+              <Button
+                onClick={() => setCounter((prev) => prev - 1)}
+                variant={'outline'}
+              >
                 <FaMinus />
               </Button>
             </div>
-            <Button className='flex items-center gap-2'>
+            <Button
+              onClick={() =>
+                dispatch(addToCartAndReplaceCount({ count: counter, product }))
+              }
+              className='flex items-center gap-2'
+            >
               <FaCartShopping /> Add To Cart
             </Button>
           </div>

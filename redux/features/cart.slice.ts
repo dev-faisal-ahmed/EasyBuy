@@ -18,7 +18,7 @@ export const CartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart: (state: CartSliceType, action: PayloadAction<CartType>) => {
+    addToCart: (state, action: PayloadAction<CartType>) => {
       const { product, count } = action.payload;
       const { productId } = product;
       let doesExist = false;
@@ -31,12 +31,41 @@ export const CartSlice = createSlice({
         }
         return el;
       });
+      // removing any element which count is zero
 
-      if (!doesExist) state.cart = [...state.cart, { product, count }];
+      if (!doesExist) state.cart = [...state.cart, action.payload];
+      state.cart = state.cart.filter((cart) => cart.count > 0);
 
+      setDataToLocal(LocalStorageKeys.CART, state.cart);
+    },
+
+    removeFromCart: (state, action: PayloadAction<string>) => {
+      state.cart = state.cart.filter(
+        (cart) => cart.product.productId !== action.payload,
+      );
+
+      setDataToLocal(LocalStorageKeys.CART, state.cart);
+    },
+
+    addToCartAndReplaceCount: (state, action: PayloadAction<CartType>) => {
+      const { count, product } = action.payload;
+      let doesExist = false;
+
+      state.cart.map((cart) => {
+        if (cart.product.productId === product.productId) {
+          cart.count = count;
+          doesExist = true;
+        }
+        return cart;
+      });
+
+      if (!doesExist) state.cart = [...state.cart, action.payload];
+      // removing items
+      state.cart = state.cart.filter((cart) => cart.count > 0);
       setDataToLocal(LocalStorageKeys.CART, state.cart);
     },
   },
 });
 
-export const { addToCart } = CartSlice.actions;
+export const { addToCart, removeFromCart, addToCartAndReplaceCount } =
+  CartSlice.actions;

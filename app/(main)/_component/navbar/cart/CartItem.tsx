@@ -2,7 +2,7 @@
 
 import { CartType } from '@/lib/types/data.types';
 import { cn } from '@/lib/utils';
-import { addToCart } from '@/redux/features/cart.slice';
+import { addToCart, removeFromCart } from '@/redux/features/cart.slice';
 import { useAppDispatch } from '@/redux/redux.hook';
 import { Minus as MinusIcon, Plus as PlusIcon, X as XIcon } from 'lucide-react';
 import Image from 'next/image';
@@ -35,7 +35,10 @@ export function CartItem({ product, count, className }: CartItemProps) {
       <div className='w-full'>
         <div className='flex w-full items-center justify-between'>
           <h3 className='font-semibold'>{name}</h3>
-          <span className='cursor-pointer'>
+          <span
+            onClick={() => dispatch(removeFromCart(product.productId))}
+            className='cursor-pointer'
+          >
             <XIcon size={18} />
           </span>
         </div>
